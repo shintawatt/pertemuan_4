@@ -1,110 +1,74 @@
 import 'package:flutter/material.dart';
-import 'package:pml/basic_widgets/image_widget.dart';
-import 'package:pml/basic_widgets/text_input.dart';
-import 'package:pml/basic_widgets/text_widget.dart';
-import 'package:pml/pages/google_map_review.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const ProfileApp());
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class ProfileApp extends StatelessWidget {
+  const ProfileApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const GoogleMapReview()
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(body: Center(child: ProfileCard())),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  DateTime? _dateTime = DateTime.now();
-
-  //void _incrementCounter() {
-  //  setState(() {
-  //    _counter++;
-  //  });
-  //}
-
-  void tampilkanDialog(BuildContext context) {
-    Widget okButton = TextButton(
-      child: const Text("OK"),
-      onPressed: () {
-        Navigator.pop(context);
-      },
-    );
-
-    AlertDialog alert = AlertDialog(
-      title: const Text("Dialog"),
-      content: const Text("Ini adalah dialog"),
-      actions: [
-        okButton,
-      ],
-    );
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
+class ProfileCard extends StatelessWidget {
+  const ProfileCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+    return Container(
+      width: 320,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.indigo.shade50,
+        borderRadius: BorderRadius.circular(16),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(_dateTime.toString()),
-            MyImageWidget(),
-            MyWidget(),
-            InputTextWidget(),
-            ElevatedButton(
-              child: const Text("ubah tanggal"),
-              onPressed: () async {
-                final DateTime? tanggal = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(2015, 8),
-                  lastDate: DateTime(2101),
-                );
-
-                if (tanggal != null && tanggal != _dateTime) {
-                  setState(() {
-                    _dateTime = tanggal;
-                  });
-                }
-              },
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => tampilkanDialog(context),
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            children: [
+              const CircleAvatar(child: Icon(Icons.person)),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: const [
+                    Text(
+                      'Nama Mahasiswa',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text('Shinta Nur Widya Wati'),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          const Row(
+            children: [
+              Expanded(child: Text('NIM')),
+              Text('24.52.0001'),
+            ],
+          ),
+          const SizedBox(height: 4),
+          const Row(
+            children: [
+              Expanded(child: Text('Kelas')),
+              Text('Teknologi Informasi'),
+            ],
+          ),
+          const SizedBox(height: 4),
+          const Row(
+            children: [
+              Expanded(child: Text('Email')),
+              Text('shinta@example.com'),
+            ],
+          ),
+        ],
       ),
     );
   }
