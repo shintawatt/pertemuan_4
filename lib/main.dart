@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:pml/pages/shoping_screen.dart';
 import 'package:pml/pages/detail_shoping_screen.dart';
+import 'package:pml/pages/shoping_screen.dart';
+import 'package:pml/theme/app_theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,10 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Shopping List',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      title: 'Shopping List Marketplace',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.lightTheme,
+      initialRoute: '/',
       routes: {
         '/': (context) => const ShopingScreen(),
         '/detail': (context) => const DetailShopingScreen(),
